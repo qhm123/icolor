@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div id="page-intro">
+		欢迎来到“爱颜色”，你可以在这里<a href="pick.html">挑选</a>你喜欢的颜色，分享你关于颜色的故事和心情。
+	</div>
+	
+	<div class="hint">
+		{{ hint }}
+	</div>
+
+	<div id="postlist">	
+		{% for hotcolor in hotcolors %}
+			<div id="post-{{hotcolor.key.id}}" class="post-home">
+				<div class="post-content">
+					<a href="/detail/{{ hotcolor.key.id }}" style="background-color: {{ hotcolor.value }};"></a>
+				</div>
+				<div class="post-messages">
+					<div class="post-messages-1">添加时间：{{ hotcolor.creat_time|date:"Y.m.d" }}</div>
+					<div class="post-messages-1">喜欢人数：{{ hotcolor.likecount }}</div>
+					<!-- <div class="post-messages-2">Tags:{% if entry.strtags %}{%for tag in entry.tags%} <a href="/tag/{{tag}}">{{tag}}</a> {%endfor%}{%endif%}</div> -->
+					<div class="post-messages-3"><a href="{{ like_url }}/{{ hotcolor.key.id }}">喜欢</a></div>
+					<!-- <div class="post-messages-3"><a href="{{ comment_url }}">详细</a></div> -->
+				</div>
+			</div>
+		{% endfor %}
+
+		<div id="commentsnavi">
+			{% for page_url in page_urls %}
+				<a href="{{ page_url }}" {% ifequal page_index forloop.counter0 %}style="background-color:#555;"{% endifequal %}>{{ page_url }}</a>
+			{% endfor %}
+		</div>
+	</div>
+	
+{% include "sidebar.html" %}
+{% endblock %}
