@@ -22,7 +22,7 @@ def require_login(method):
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         if 'oauth_access_token' not in self.session:
-            return HttpResponseRedirect(get_referer_url(self))
+            return HttpResponseRedirect('/login')
         else:
             access_token = self.session['oauth_access_token']
             expires_in = self.session['oauth_request_expires']
