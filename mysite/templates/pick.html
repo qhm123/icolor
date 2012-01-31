@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<link type="text/css" rel="stylesheet" href="/static/colorpicker/farbtastic.css" />
+	<script type="text/javascript" src="/static/js/core.js"></script>
+	<script type="text/javascript" src="/static/colorpicker/farbtastic.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#colorpicker').farbtastic('#temp-color');
+			$('#random-button').click(
+				function(){
+					value = '#' + randomChar(6);
+					$.farbtastic('#colorpicker').setColor(value)
+				}
+			)
+			// 设置随机初值
+			value = '#' + randomChar(6);
+			$.farbtastic('#colorpicker').setColor(value)
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+	<div id="page-intro">
+		欢迎来到“爱颜色”，你可以在这里<a href="pick.html">挑选</a>你喜欢的颜色，分享你关于颜色的故事和心情。
+	</div>
+	<div class="hint">
+		{{ hint }}
+	</div>
+	
+	<div id="left-content-single">
+		<div id="picker">
+            <form id="commentform" action="/pick" method="post">{% csrf_token %}
+				<div><input type="text" id="temp-color" name="colorvalue" value="#123456" /></div>
+				<div id="colorpicker"></div>
+				<input id="random-button" type="button" value="随机挑一个" />
+				<p>
+					<textarea name="comment" id="comment" tabindex="4" cols="60" rows="10" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('submit').click();return false};">我喜欢这个颜色。</textarea>
+					<input type="text" name="tags" id="tag" tabindex="2" />（标签，逗号分隔）
+				</p>
+				<input name="submit" type="submit" id="submit" tabindex="5" value="&nbsp;确定&nbsp; " />
+			</form>
+		</div>
+	</div>
+	
+	{% include "sidebar.html" %}
+{% endblock %}

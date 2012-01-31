@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+	<div id="page-intro">
+		欢迎来到“爱颜色”，你可以在这里<a href="pick.html">挑选</a>你喜欢的颜色，分享你关于颜色的故事和心情。
+	</div>
+	<div class="hint">
+		{{ hint }}
+	</div>
+	
+	<ul id="wall">
+	{% for color in colors %}
+		<li>
+			<a href="/detail/{{ color.id }}" style="background-color: {{ color.value }}; color: {{ color.value }};">
+				{{ color.value }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+{% endblock %}

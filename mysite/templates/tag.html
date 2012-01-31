@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div id="page-intro">
+		欢迎来到“爱颜色”，你可以在这里<a href="pick.html">挑选</a>你喜欢的颜色，分享你关于颜色的故事和心情。
+	</div>
+	
+	<div class="hint">
+		{{ hint }}
+	</div>
+
+	<div id="postlist">	
+		{% for color in colors %}
+			<div id="post-{{ color.id }}" class="post-home">
+				<div class="post-content">
+					<a href="/detail/{{ color.id }}" style="background-color: {{ color.value }};"></a>
+				</div>
+				<div class="post-messages">
+					<div class="post-messages-1">添加时间：{{ color.creat_time|date:"Y.m.d" }}</div>
+					<div class="post-messages-1">喜欢人数：{{ color.likecount }}</div>
+					<div class="post-messages-3"><a href="/like/{{ color.id }}">喜欢</a></div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	
+{% include "sidebar.html" %}
+{% endblock %}

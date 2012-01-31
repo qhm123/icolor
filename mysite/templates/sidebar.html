@@ -1,0 +1,62 @@
+<div id="sidebar">
+	{% if widget_users_wall %}
+		<div class="widget_users_wall">
+			<h3><span>用户墙</span></h3>
+			<ul>
+				{% for user in users %}
+					<li><a href="{{ user.domain }}" title="喜欢了{{ user.like_color_count }}个颜色"><img src={{ user.profile_image_url }} alt="{{ user.name }}" /></a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	{% if widget_users_like_wall %}
+		<div class="widget_users_like_wall">
+			<h3><span>喜欢该颜色的用户</span></h3>
+			<ul>
+				{% for user in color.like_users %}
+					<li><a href="{{ user.domain }}"><img src={{ user.profile_image_url }} alt="{{ user.name }}" /></a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	{% if widget_tag_cloud %}
+		<div class="widget_tag_cloud">
+			<h3><span>标签云</span></h3>
+			<div>
+			{% for t in alltags %}
+				<a title="{{ t.count }} 颜色" href="/tag/{{ t.id }}" style='font-size:{{ t.count|add:10 }}px;'>{{ t.name }}</a>
+			{%endfor%}
+			</div>
+		</div>
+	{% endif %}
+	{% if widget_color_tag_cloud %}
+		<div class="widget_color_tag_cloud">
+			<h3><span>标签云</span></h3>
+			<div>
+			{% for t in alltags %}
+				<a title="{{ t.count }} 颜色" href="/tag/{{ t.id }}" style='font-size:{{ t.count|add:10 }}px;'>{{ t.name }}</a>
+			{%endfor%}
+			</div>
+		</div>
+	{% endif %}
+	{% if widget_mycolors %}
+		<div class="widget_mycolors">
+			<h3><span>我的颜色</span></h3>
+			<ul>
+				{% for mycolor in mycolors %}
+					<li><a href="/detail/{{ mycolor.id }}" style="background-color:{{ mycolor.value }}"></a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	{% if widget_mycommets %}
+		<div class="widget_mycommets">
+			<h3><span>我的评论</span></h3>
+			<ul>
+				{% for mycomment in mycomments %}
+					<li><a style="background-color:{{ mycomment.color.value }};color:{{ mycomment.color.value }};">{{ mycomment.color.value }}</a>：{{ mycomment.text }}——{{ mycomment.creat_time|date:"Y.m.d" }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+</div>

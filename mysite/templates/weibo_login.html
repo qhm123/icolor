@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type="text/javascript" language="javascript">
+function reloadyemian()
+{
+  window.location.href="{{ url|safe }}"; 
+}
+window.setTimeout("reloadyemian();",1000); 
+</script> 
+{% endblock %}
+
+{% block content %}
+<div>
+微博登录中……
+</div>
+{% endblock %}
